@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOLIARCH — Private Publishing &amp; Sovereign Archives</title>
+  <meta name="description" content="Foliarch is a private publishing house and sovereign family memory archive studio. We transform decades of scattered letters, recordings, and milestones into a museum-grade, hand-bound heirloom chronicle paired with an air-gapped private AI archive." />
+  <meta property="og:title" content="FOLIARCH — Private Publishing & Sovereign Archives" />
+  <meta property="og:description" content="Some histories deserve more than memory. Hand-bound heirloom chronicles and air-gapped family memory enclaves." />
+  <meta property="og:url" content="https://foliarch.com" />
+
+  <!-- Google Fonts: Cormorant Garamond, Newsreader, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Custom Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0C0B0A',
+            surface: '#141311',
+            surfaceElevated: '#1B1916',
+            ivory: '#F4F0E8',
+            stone: '#9E988E',
+            brass: '#C5A467',
+            brassSoft: 'rgba(197, 164, 103, 0.2)',
+            parchment: '#F6F2E9',
+            ink: '#1C1A17',
+            inkMuted: '#58524A',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            editorial: ['"Newsreader"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          letterSpacing: {
+            widestPlus: '0.24em',
+            foliarch: '0.34em',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Bespoke Quiet-Luxury & Archival Paper CSS -->
+  <style>
+    :root {
+      --bg-obsidian: #0C0B0A;
+      --bg-surface: #141311;
+      --text-ivory: #F4F0E8;
+      --text-stone: #9E988E;
+      --accent-brass: #C5A467;
+      --hairline: rgba(244, 240, 232, 0.09);
+      --hairline-brass: rgba(197, 164, 103, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: var(--text-ivory);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle tactile paper-grain overlay */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .border-hairline {
+      border-color: var(--hairline);
+    }
+
+    .border-hairline-brass {
+      border-color: var(--hairline-brass);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0C0B0A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2B2722;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C5A467;
+    }
+
+    /* Two-Page Open Book Spread on Cream Archival Cotton Paper */
+    .book-spread {
+      background-color: #F6F2E9;
+      color: #1C1A17;
+      box-shadow:
+        0 32px 72px -16px rgba(0, 0, 0, 0.88),
+        0 0 0 1px rgba(197, 164, 103, 0.26);
+      position: relative;
+    }
+
+    .book-paper-texture {
+      background-image:
+        radial-gradient(rgba(28, 26, 23, 0.032) 1px, transparent 0),
+        linear-gradient(90deg, rgba(28, 26, 23, 0.025) 0%, transparent 10%, transparent 90%, rgba(28, 26, 23, 0.03) 100%);
+      background-size: 22px 22px, 100% 100%;
+    }
+
+    /* Center Spine Gutter Shadow on Desktop */
+    @media (min-width: 1024px) {
+      .book-spine-shadow::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 64px;
+        transform: translateX(-50%);
+        background: linear-gradient(
+          90deg,
+          rgba(28, 26, 23, 0) 0%,
+          rgba(28, 26, 23, 0.045) 35%,
+          rgba(28, 26, 23, 0.14) 50%,
+          rgba(28, 26, 23, 0.045) 65%,
+          rgba(28, 26, 23, 0) 100%
+        );
+        pointer-events: none;
+      }
+    }
+
+    /* Literary Drop Cap */
+    .editorial-dropcap::first-letter {
+      float: left;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 4.35rem;
+      line-height: 0.8;
+      padding-top: 0.18rem;
+      padding-right: 0.78rem;
+      padding-bottom: 0.1rem;
+      color: #1C1A17;
+      font-weight: 500;
+    }
+
+    /* Smooth Fade Animation */
+    .fade-enter {
+      animation: fadeInSoft 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes fadeInSoft {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Ambient Obsidian Hero Lighting */
+    .hero-radial-glow {
+      background: radial-gradient(
+        ellipse 68% 52% at 50% 16%,
+        rgba(197, 164, 103, 0.08) 0%,
+        rgba(20, 19, 17, 0.22) 55%,
+        rgba(12, 11, 10, 0) 100%
+      );
+    }
+
+    /* Inline Citation Pill inside Vault Terminal */
+    .inline-citation-pill {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      line-height: 1;
+      padding: 0.22rem 0.48rem;
+      margin: 0 0.15rem;
+      border-radius: 2px;
+      border: 1px solid rgba(197, 164, 103, 0.35);
+      background-color: rgba(197, 164, 103, 0.1);
+      color: #C5A467;
+      cursor: pointer;
+      vertical-align: baseline;
+      transition: all 0.2s ease;
+    }
+
+    .inline-citation-pill:hover,
+    .inline-citation-pill.active-pill {
+      background-color: #C5A467;
+      color: #0C0B0A;
+      border-color: #C5A467;
+    }
+
+    /* Custom Form Inputs */
+    .foliarch-input {
+      background-color: rgba(12, 11, 10, 0.72);
+      border: 1px solid rgba(244, 240, 232, 0.11);
+      color: #F4F0E8;
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .foliarch-input:focus {
+      outline: none;
+      border-color: #C5A467;
+      background-color: rgba(20, 19, 17, 0.98);
+    }
+
+    .foliarch-input::placeholder {
+      color: rgba(158, 152, 142, 0.46);
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-ivory selection:bg-brass/25 selection:text-ivory">
+
+  <!-- Tactile Archival Paper Grain Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- ===================================================================== -->
+  <!-- NAVIGATION BAR                                                        -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-obsidian/90 backdrop-blur-md border-b border-hairline">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
+      
+      <!-- Foliarch Architectural SVG Monogram & Wordmark -->
+      <a href="#" class="flex items-center gap-3.5 group focus:outline-none">
+        <svg class="w-8 h-8 text-brass transition-transform duration-500 group-hover:scale-105" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Outer Archival Frame -->
+          <rect x="2.5" y="2.5" width="31" height="31" stroke="currentColor" stroke-width="0.9" stroke-opacity="0.55" />
+          <!-- Inner Folio Rule -->
+          <rect x="5.5" y="5.5" width="25" height="25" stroke="currentColor" stroke-width="0.65" stroke-opacity="0.28" />
+          <!-- Architectural Foliarch 'F' & Spine Pillar -->
+          <path d="M13.5 10.5V25.5" stroke="currentColor" stroke-width="1.35" />
+          <path d="M11.5 10.5H23.5" stroke="currentColor" stroke-width="1.25" />
+          <path d="M13.5 17.5H21" stroke="currentColor" stroke-width="1.15" />
+          <path d="M11.5 25.5H16" stroke="currentColor" stroke-width="0.95" />
+          <!-- Subtle Folio Corner Accent -->
+          <circle cx="23.5" cy="24.5" r="1" fill="currentColor" fill-opacity="0.75" />
+        </svg>
+        <div class="flex flex-col">
+          <span class="font-serif text-xl sm:text-[1.35rem] tracking-foliarch text-ivory font-medium uppercase leading-none">
+            Foliarch
+          </span>
+          <span class="font-mono text-[9px] tracking-widestPlus text-stone uppercase mt-1 hidden sm:block">
+            Private Publishing &amp; Archives
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-9 text-xs tracking-widestPlus uppercase text-stone font-normal">
+        <a href="#chronicle" class="hover:text-ivory transition-colors py-2">The Chronicle</a>
+        <a href="#vault" class="hover:text-ivory transition-colors py-2">The Vault</a>
+        <a href="#provenance" class="hover:text-ivory transition-colors py-2">Provenance</a>
+        <a href="#inquire" class="hover:text-ivory transition-colors py-2">Inquire</a>
+      </nav>
+
+      <!-- Desktop Action + Mobile Menu Trigger -->
+      <div class="flex items-center gap-3">
+        <a href="#inquire" class="inline-flex items-center justify-center px-4 sm:px-5 py-2.5 text-[11px] sm:text-xs font-mono uppercase tracking-widestPlus text-ivory border border-hairline-brass hover:border-brass hover:bg-brass/10 transition-all rounded-sm">
+          Inquire for Commission
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" type="button" aria-label="Toggle Navigation" aria-expanded="false" class="md:hidden p-2.5 text-stone hover:text-ivory border border-hairline rounded-sm focus:outline-none">
+          <svg id="menu-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M4 8h16M4 16h16" />
+          </svg>
+          <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-surface border-b border-hairline px-6 py-6 space-y-4">
+      <a href="#chronicle" class="mobile-nav-link block font-mono text-xs uppercase tracking-widestPlus text-stone hover:text-ivory py-2">01 · The Chronicle</a>
+      <a href="#vault" class="mobile-nav-link block font-mono text-xs uppercase tracking-widestPlus text-stone hover:text-ivory py-2">02 · The Vault</a>
+      <a href="#provenance" class="mobile-nav-link block font-mono text-xs uppercase tracking-widestPlus text-stone hover:text-ivory py-2">03 · Provenance</a>
+      <a href="#inquire" class="mobile-nav-link block font-mono text-xs uppercase tracking-widestPlus text-stone hover:text-ivory py-2">04 · Inquire</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================================================================== -->
+    <!-- HERO SECTION                                                          -->
+    <!-- ===================================================================== -->
+    <section class="relative hero-radial-glow border-b border-hairline overflow-hidden">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-20 pb-24 sm:pt-28 sm:pb-32 lg:pt-36 lg:pb-40 relative">
+        
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Eyebrow -->
+          <div class="inline-flex items-center gap-3 px-4 py-1.5 border border-hairline-brass rounded-sm bg-surface/75 mb-8 sm:mb-10">
+            <span class="w-1.5 h-1.5 rounded-full bg-brass"></span>
+            <p class="font-mono text-[10px] sm:text-xs tracking-widestPlus uppercase text-stone">
+              Private Publishing &amp; Sovereign Archives
+            </p>
+          </div>
+
+          <!-- Monumental Serif Headline -->
+          <h1 class="font-serif text-4xl sm:text-6xl lg:text-[4.65rem] font-normal text-ivory leading-[1.06] tracking-tight mb-7 sm:mb-9">
+            Some Histories Deserve More Than Memory
+          </h1>
+
+          <!-- Refined Subheadline -->
+          <p class="font-sans text-base sm:text-lg lg:text-xl text-stone font-light leading-relaxed max-w-2xl mx-auto mb-10 sm:mb-12">
+            Foliarch transforms decades of scattered letters, recordings, and milestones into a museum-grade, hand-bound heirloom chronicle—paired with an air-gapped private AI archive built exclusively for one family.
+          </p>
+
+          <!-- Primary & Secondary CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-14">
+            <a href="#inquire" class="w-full sm:w-auto px-8 py-4 bg-ivory text-obsidian font-mono text-xs uppercase tracking-widestPlus font-medium hover:bg-brass hover:text-obsidian transition-colors rounded-sm">
+              Inquire for Private Commission
+            </a>
+            <a href="#chronicle" class="w-full sm:w-auto px-8 py-4 bg-transparent text-ivory border border-hairline hover:border-brass/60 font-mono text-xs uppercase tracking-widestPlus transition-colors rounded-sm inline-flex items-center justify-center gap-2.5">
+              <span>Inspect Archival Specimen</span>
+              <span aria-hidden="true" class="text-brass">↓</span>
+            </a>
+          </div>
+
+          <!-- Discreet Exclusivity Note -->
+          <div class="pt-8 border-t border-hairline max-w-xl mx-auto">
+            <p class="font-mono text-[11px] tracking-wider text-stone/90 leading-relaxed">
+              Four private commissions accepted per quarter &nbsp;·&nbsp; Bilateral NDA &nbsp;·&nbsp; Zero cloud retention
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 1: INTERACTIVE SAMPLE BIOGRAPHY SPREAD (#chronicle)           -->
+    <!-- ===================================================================== -->
+    <section id="chronicle" class="py-24 sm:py-32 border-b border-hairline bg-surface/45">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
+          <p class="font-mono text-xs uppercase tracking-widestPlus text-brass mb-3">
+            Section I &nbsp;/&nbsp; The Chronicle
+          </p>
+          <h2 class="font-serif text-3xl sm:text-5xl font-normal text-ivory leading-tight mb-5">
+            Literary non-fiction anchored in primary evidence.
+          </h2>
+          <p class="font-sans text-sm sm:text-base text-stone font-light leading-relaxed">
+            Our archival synthesis engines cross-reference oral history transcripts, personal ledgers, and decades of correspondence—producing a definitive family biography footnoted to the exact source artifact.
+          </p>
+        </div>
+
+        <!-- 3 Interactive Chapter Tabs -->
+        <div role="tablist" aria-label="Sample Chronicle Chapters" class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 border border-hairline-brass bg-obsidian mb-8 sm:mb-10 rounded-sm overflow-hidden">
+          <button
+            type="button"
+            role="tab"
+            aria-selected="true"
+            data-chapter="0"
+            class="chapter-tab px-5 py-4 text-left border-b sm:border-b-0 sm:border-r border-hairline transition-colors bg-surfaceElevated text-ivory focus:outline-none">
+            <span class="block font-mono text-[10px] uppercase tracking-widestPlus text-brass mb-1">Folio 042 · February 1978</span>
+            <span class="font-serif text-lg sm:text-xl block">I. The Winter of 1978</span>
+          </button>
+
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-chapter="1"
+            class="chapter-tab px-5 py-4 text-left border-b sm:border-b-0 sm:border-r border-hairline transition-colors text-stone hover:text-ivory focus:outline-none">
+            <span class="block font-mono text-[10px] uppercase tracking-widestPlus text-stone/70 mb-1">Folio 118 · September 1986</span>
+            <span class="font-serif text-lg sm:text-xl block">II. Letters from Geneva</span>
+          </button>
+
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-chapter="2"
+            class="chapter-tab px-5 py-4 text-left transition-colors text-stone hover:text-ivory focus:outline-none">
+            <span class="block font-mono text-[10px] uppercase tracking-widestPlus text-stone/70 mb-1">Folio 264 · November 2021</span>
+            <span class="font-serif text-lg sm:text-xl block">III. On Succession</span>
+          </button>
+        </div>
+
+        <!-- Two-Page Open Book Spread on Cream Archival Cotton Paper (#F6F2E9) -->
+        <div class="max-w-6xl mx-auto">
+          <div id="book-spread-container" class="book-spread book-paper-texture book-spine-shadow rounded-sm border border-brass/30 overflow-hidden">
+            
+            <div id="book-content" class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-ink/10 fade-enter">
+              
+              <!-- LEFT PAGE (Verso) -->
+              <div class="p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[480px] lg:min-h-[620px]">
+                <div>
+                  <!-- Running Header -->
+                  <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-widestPlus text-inkMuted/85 pb-6 mb-8 border-b border-ink/10">
+                    <span>FOLIARCH ARCHIVAL EDITION · VOL. I</span>
+                    <span id="book-folio-left">Folio 042</span>
+                  </div>
+
+                  <!-- Chapter Roman & Title -->
+                  <p id="book-chapter-num" class="font-mono text-[11px] uppercase tracking-widestPlus text-inkMuted mb-2">
+                    Chapter I &nbsp;·&nbsp; February 1978
+                  </p>
+                  <h3 id="book-chapter-title" class="font-serif text-3xl sm:text-4xl font-medium text-ink leading-tight mb-3">
+                    The Winter of 1978
+                  </h3>
+                  <p id="book-chapter-subtitle" class="font-editorial italic text-lg text-inkMuted mb-8">
+                    Bahnhofstrasse, Zürich — On risking an entire balance sheet on a single handshake.
+                  </p>
+
+                  <!-- Left Page Body Text with Drop Cap -->
+                  <div id="book-left-paragraphs" class="font-editorial text-[1.06rem] sm:text-[1.12rem] leading-[1.82] text-ink space-y-5">
+                    <p class="editorial-dropcap">
+                      By the third week of February, snow had banked waist-high against the iron railings along the Limmat, and Henrik had less than forty-eight hours before the credit line in Rotterdam expired. In the back booth of Café Sprüngli, he laid a single sheet of onion-skin telex paper between two espresso cups—not a formal charter party, only a hand-penciled freight schedule signed in blue fountain ink.
+                    </p>
+                    <p>
+                      “If the North Sea ice holds through March, we lose the deposit and the vessel,” he recalled forty years later, tapping the ash from his cigarette before the studio microphone. “If it breaks early, we own the corridor.”
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Left Page Footer -->
+                <div class="pt-8 mt-8 border-t border-ink/10 flex items-center justify-between font-mono text-[10px] text-inkMuted">
+                  <span>140GSM COTTON RAG · SMYTH-SEWN</span>
+                  <span id="book-page-left">42</span>
+                </div>
+              </div>
+
+              <!-- RIGHT PAGE (Recto) -->
+              <div class="p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[480px] lg:min-h-[620px]">
+                <div>
+                  <!-- Running Header -->
+                  <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-widestPlus text-inkMuted/85 pb-6 mb-8 border-b border-ink/10">
+                    <span id="book-running-right">Part One: Foundations</span>
+                    <span>Primary Provenance</span>
+                  </div>
+
+                  <!-- Right Page Body Text -->
+                  <div id="book-right-paragraphs" class="font-editorial text-[1.06rem] sm:text-[1.12rem] leading-[1.82] text-ink space-y-5 mb-10">
+                    <p>
+                      He did not cable the board in Stockholm until the train had already crossed the Rhine. In the margin of his pocket ledger that evening, beneath a column of Swiss franc conversions, he wrote a single line that would govern every acquisition the family made for the next four decades: <em class="italic">“Never syndicate conviction; share only the harvest.”</em>
+                    </p>
+                    <p>
+                      Three weeks later, the ice cleared six days ahead of the meteorological forecast. The first cargo docked at dawn, clearing the company’s entire debt before noon.
+                    </p>
+                  </div>
+
+                  <!-- Primary Source Footnotes Box -->
+                  <div class="bg-ink/[0.038] border-l-2 border-ink/45 p-5 space-y-2.5">
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[10px] uppercase tracking-widestPlus text-ink font-medium">
+                        Archival Footnotes &amp; Provenance
+                      </span>
+                      <span id="book-source-code" class="font-mono text-[10px] text-inkMuted">
+                        REF: FLR-1978-014
+                      </span>
+                    </div>
+                    <p id="book-citation-primary" class="font-editorial italic text-[0.96rem] text-ink/90 leading-relaxed">
+                      1. Personal Ledger No. 14 (1977–1979), entry dated 19 February 1978, p. 88; verified against Cassette Tape 03B, Side A (recorded October 2016).
+                    </p>
+                    <p id="book-citation-secondary" class="font-mono text-[11px] text-inkMuted leading-relaxed">
+                      Indexed in Foliarch Sovereign Enclave · Verbatim audio transcript &amp; 1200-DPI margin scan linked.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Right Page Footer -->
+                <div class="pt-8 mt-8 border-t border-ink/10 flex items-center justify-between font-mono text-[10px] text-inkMuted">
+                  <span>ISTANBUL BINDERY EDITION · ONE OF THREE</span>
+                  <span id="book-page-right">43</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Specimen Footnote -->
+          <div class="mt-5 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-stone/80 gap-2 px-1">
+            <span>Specimen pages set in Newsreader &amp; Cormorant Garamond · Illustrative composite archive</span>
+            <span>Every narrative claim anchored to primary family records</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 2: INTERACTIVE SOVEREIGN FAMILY MEMORY VAULT (#vault)         -->
+    <!-- ===================================================================== -->
+    <section id="vault" class="py-24 sm:py-32 border-b border-hairline bg-obsidian">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-14 sm:mb-16 gap-6">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widestPlus text-brass mb-3">
+              Section II &nbsp;/&nbsp; The Vault
+            </p>
+            <h2 class="font-serif text-3xl sm:text-5xl font-normal text-ivory leading-tight">
+              Converse with your family’s primary sources.
+            </h2>
+          </div>
+          <p class="font-sans text-sm sm:text-base text-stone font-light max-w-md leading-relaxed">
+            Installed on dedicated, air-gapped silicon hardware inside your residence or family office. Interrogate decades of correspondence and audio recordings with instant primary-source verification.
+          </p>
+        </div>
+
+        <!-- Air-Gapped Enclave Terminal Container -->
+        <div class="border border-hairline-brass bg-surface rounded-sm shadow-2xl overflow-hidden">
+          
+          <!-- Terminal Status Bar -->
+          <div class="bg-[#0F0E0D] border-b border-hairline px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400/90 animate-pulse"></span>
+              <span class="font-mono text-[10px] sm:text-[11px] uppercase tracking-widestPlus text-ivory">
+                FOLIARCH ENCLAVE // OFFLINE NODE v4.2 · ZERO TELEMETRY
+              </span>
+            </div>
+            <span class="font-mono text-[10px] text-stone uppercase tracking-wider">
+              4,812 ARTIFACTS INDEXED · AES-256-GCM
+            </span>
+          </div>
+
+          <!-- Terminal Content Body -->
+          <div class="p-5 sm:p-8 lg:p-10 space-y-8">
+            
+            <!-- Clickable Preset Family Archive Prompts -->
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-widestPlus text-stone mb-3">
+                Select a Curated Archival Prompt or Query Below:
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <button
+                  type="button"
+                  data-vault-query="0"
+                  class="vault-preset-btn text-left p-4 border border-brass/55 bg-brass/10 rounded-sm transition-all hover:border-brass focus:outline-none">
+                  <span class="block font-mono text-[10px] text-brass uppercase tracking-wider mb-1">Prompt 01 · Strategic History</span>
+                  <span class="font-sans text-xs text-ivory leading-snug block">
+                    “Why did Grandfather walk away from the 1982 Rotterdam merger?”
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  data-vault-query="1"
+                  class="vault-preset-btn text-left p-4 border border-hairline bg-obsidian/65 rounded-sm transition-all hover:border-brass/60 focus:outline-none">
+                  <span class="block font-mono text-[10px] text-stone uppercase tracking-wider mb-1">Prompt 02 · Correspondence</span>
+                  <span class="font-sans text-xs text-ivory/90 leading-snug block">
+                    “Find letters where Grandmother wrote about building the summer house.”
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  data-vault-query="2"
+                  class="vault-preset-btn text-left p-4 border border-hairline bg-obsidian/65 rounded-sm transition-all hover:border-brass/60 focus:outline-none">
+                  <span class="block font-mono text-[10px] text-stone uppercase tracking-wider mb-1">Prompt 03 · Governance</span>
+                  <span class="font-sans text-xs text-ivory/90 leading-snug block">
+                    “What principles did Dad record regarding family stewardship?”
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Split Layout: Left = Synthesized Answer with Inline Citation Pills | Right = Adjacent Primary Source Inspection Card -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              
+              <!-- Left Column (7 cols): Synthesized Local Retrieval Response -->
+              <div class="lg:col-span-7 border border-hairline bg-obsidian/85 p-5 sm:p-7 rounded-sm flex flex-col justify-between space-y-6">
+                <div class="space-y-5">
+                  <!-- Active Question Header -->
+                  <div class="flex items-start gap-3 pb-4 border-b border-hairline">
+                    <span class="font-mono text-xs text-brass uppercase tracking-wider pt-1 shrink-0">QUERY &gt;</span>
+                    <p id="vault-active-question" class="font-serif text-xl sm:text-2xl text-ivory leading-snug">
+                      Why did Grandfather walk away from the 1982 Rotterdam merger?
+                    </p>
+                  </div>
+
+                  <!-- Synthesized Response with Clickable Inline Citation Pills -->
+                  <div id="vault-answer-container" class="space-y-4 fade-enter">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <span id="vault-record-count" class="font-mono text-[10px] uppercase tracking-widestPlus text-stone">
+                        Retrieved from 3 Verified Primary Artifacts
+                      </span>
+                      <span class="font-mono text-[10px] text-emerald-400/90">
+                        LOCAL VECTOR MATCH · 0.984
+                      </span>
+                    </div>
+
+                    <div id="vault-answer-text" class="font-sans text-sm sm:text-[0.95rem] text-ivory/90 font-light leading-[1.78] space-y-4">
+                      <!-- Populated dynamically with clickable inline citation pills -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Citation Quick-Selector Footer -->
+                <div class="pt-4 border-t border-hairline">
+                  <span class="block font-mono text-[10px] uppercase tracking-widestPlus text-stone mb-2.5">
+                    Referenced Primary Sources (Click any pill to inspect):
+                  </span>
+                  <div id="vault-source-badges" class="flex flex-wrap gap-2">
+                    <!-- Populated dynamically via JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column (5 cols): Adjacent Primary Source Inspection Card -->
+              <aside aria-label="Primary Source Inspection" class="lg:col-span-5 border border-brass/35 bg-surfaceElevated p-5 sm:p-7 rounded-sm flex flex-col justify-between">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between pb-3.5 border-b border-hairline">
+                    <span class="font-mono text-[10px] uppercase tracking-widestPlus text-brass">
+                      Primary Source Inspection
+                    </span>
+                    <span id="inspector-confidence" class="font-mono text-[10px] text-stone">
+                      VERIFIED SCAN
+                    </span>
+                  </div>
+
+                  <div class="space-y-1.5">
+                    <p id="inspector-doc-id" class="font-mono text-xs sm:text-sm text-ivory font-medium">
+                      [DOC-1978-04] · ZÜRICH STUDY LEDGER
+                    </p>
+                    <p id="inspector-doc-meta" class="font-mono text-[11px] text-stone leading-relaxed">
+                      Medium: Fountain Ink on Onion-Skin Telex · Date: 14 Nov 1982 · Archive Box 09
+                    </p>
+                  </div>
+
+                  <!-- Simulated Archival Document Card -->
+                  <div class="p-4 sm:p-5 bg-obsidian/90 border border-hairline rounded-sm relative">
+                    <div class="flex items-center justify-between text-[9px] font-mono uppercase tracking-widestPlus text-stone/60 mb-3">
+                      <span>TRANSCRIPT EXCERPT</span>
+                      <span id="inspector-folio-tag">1200 DPI ARCHIVAL MASTER</span>
+                    </div>
+                    <blockquote id="inspector-doc-excerpt" class="font-editorial italic text-base sm:text-[1.05rem] text-ivory/95 leading-relaxed">
+                      “They priced the steel and the tonnage contracts, yet valued the loyalty of forty-two captains at zero. Tell Van Der Berg we remain independent. — H.L., 14 Nov 1982, 23:40.”
+                    </blockquote>
+                  </div>
+                </div>
+
+                <div class="pt-5 mt-5 border-t border-hairline flex items-center justify-between font-mono text-[10px] text-stone/80">
+                  <span>CUSTODY: FAMILY ENCLAVE ONLY</span>
+                  <span class="text-brass">SHA-256 VERIFIED</span>
+                </div>
+              </aside>
+
+            </div>
+
+            <!-- Functional Custom Prompt Input Box -->
+            <form id="vault-custom-form" class="flex flex-col sm:flex-row gap-3 pt-2">
+              <label for="vault-custom-input" class="sr-only">Query the Sovereign Archive</label>
+              <input
+                id="vault-custom-input"
+                type="text"
+                placeholder="Enter a custom archival query — e.g., “What advice did Henrik leave regarding debt and independence?”"
+                class="foliarch-input flex-1 px-4 py-3.5 text-sm font-sans rounded-sm"
+              />
+              <button
+                type="submit"
+                class="px-6 py-3.5 bg-surfaceElevated border border-hairline-brass hover:border-brass hover:bg-brass/10 text-ivory font-mono text-xs uppercase tracking-widestPlus transition-colors rounded-sm shrink-0">
+                Retrieve from Node
+              </button>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 3: MATERIAL PROVENANCE & CRAFT (#provenance)                  -->
+    <!-- ===================================================================== -->
+    <section id="provenance" class="py-24 sm:py-32 border-b border-hairline bg-surface/40">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-16">
+          <p class="font-mono text-xs uppercase tracking-widestPlus text-brass mb-3">
+            Section III &nbsp;/&nbsp; Material Provenance &amp; Craft
+          </p>
+          <h2 class="font-serif text-3xl sm:text-5xl font-normal text-ivory leading-tight mb-5">
+            Physical permanence paired with cryptographic sovereignty.
+          </h2>
+          <p class="font-sans text-sm sm:text-base text-stone font-light leading-relaxed">
+            Every Foliarch commission unites two enduring deliverables: a hand-bound physical edition crafted in Istanbul to museum conservation standards, and an offline compute node engineered for multi-generational custody.
+          </p>
+        </div>
+
+        <!-- Dual Pillar Architectural Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Pillar A: The Istanbul Bindery Edition -->
+          <div class="border border-hairline-brass bg-obsidian/75 p-8 sm:p-10 rounded-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-6 mb-7 border-b border-hairline">
+                <div>
+                  <span class="font-mono text-[10px] uppercase tracking-widestPlus text-brass block mb-1">Deliverable I · Physical</span>
+                  <h3 class="font-serif text-2xl sm:text-3xl text-ivory font-normal">The Istanbul Bindery Edition</h3>
+                </div>
+                <svg class="w-6 h-6 text-brass/80 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+
+              <dl class="space-y-6">
+                <div class="border-b border-hairline pb-4">
+                  <dt class="font-mono text-[11px] uppercase tracking-widestPlus text-brass mb-1">Archival Paper Stock</dt>
+                  <dd class="font-sans text-sm text-ivory/90 font-light leading-relaxed">
+                    140gsm acid-free, mould-made cotton rag paper—calcium-carbonate buffered for 300+ year shelf stability without yellowing or foxing.
+                  </dd>
+                </div>
+
+                <div class="border-b border-hairline pb-4">
+                  <dt class="font-mono text-[11px] uppercase tracking-widestPlus text-brass mb-1">Binding Architecture</dt>
+                  <dd class="font-sans text-sm text-ivory/90 font-light leading-relaxed">
+                    Hand-sewn Smyth linen signatures stitched over raised spine cords, allowing heavy folio spreads to open completely flat at 180 degrees.
+                  </dd>
+                </div>
+
+                <div class="border-b border-hairline pb-4">
+                  <dt class="font-mono text-[11px] uppercase tracking-widestPlus text-brass mb-1">Leather &amp; Gold Tooling</dt>
+                  <dd class="font-sans text-sm text-ivory/90 font-light leading-relaxed">
+                    Full-grain, vegetable-tanned calfskin paired with bespoke hand-marbled <em class="italic">ebru</em> endpapers and 24-karat gold-leaf stamping impressed from custom brass dies.
+                  </dd>
+                </div>
+
+                <div>
+                  <dt class="font-mono text-[11px] uppercase tracking-widestPlus text-brass mb-1">Presentation Enclosure</dt>
+                  <dd class="font-sans text-sm text-ivory/90 font-light leading-relaxed">
+                    Custom-milled Anatolian walnut and brushed solid brass presentation chest lined in archival suede, fitted for both the bound volume and hardware enclave.
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="pt-6 mt-8 border-t border-hairline flex items-center justify-between font-mono text-[10px] text-stone uppercase tracking-wider">
+              <span>Crafted to Order in Istanbul</span>
+              <span class="text-brass">1 to 5 Copies</span>
+            </div>
+          </div>
+
+          <!-- Pillar B: The Sovereign Compute Enclave -->
+          <div class="border border-hairline-brass bg-obsidian/75 p-8 sm:p-10 rounded-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-6 mb-7 border-b border-hairline">
+                <div>
+                  <span class="font-mono text-[10px] uppercase tracking-widestPlus text-brass block mb-1">Deliverable II · Digital</span>
+                  <h3 class="font-serif text-2xl sm:text-3xl text-ivory font-normal">The Sovereign Compute Enclave</h3>
+                </div>
+                <svg class="w-6 h-6 text-brass/80 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+
+              <dl class="space-y-6">
+                <div class="border-b border-hairline pb-4">
+                  <dt class="font-mono text-[11px] uppercase tracking-widestPlus text-brass mb-1">Dedicated Air-Gapped Hardware Node</dt>
+                  <dd class="font-sans text-sm text-ivory/90 font-light leading-relaxed">
+                    Delivered as a self-contained, silent local workstation housed inside your private residence or family office—requiring zero internet connection to operate.
+                  </dd>
+                </div>
+
+                <div class="border-b border-hairline pb-4">
+                  <dt class="font-mono text-[11px] uppercase tracking-widestPlus text-brass mb-1">Local Encrypted Vector Store</dt>
+                  <dd class="font-sans text-sm text-ivory/90 font-light leading-relaxed">
+                    Every scanned letter, ledger, photograph, and oral history recording is indexed locally inside an AES-256 encrypted retrieval database with zero external API calls.
+                  </dd>
+                </div>
+
+                <div class="border-b border-hairline pb-4">
+                  <dt class="font-mono text-[11px] uppercase tracking-widestPlus text-brass mb-1">Multi-Generational Key Custody</dt>
+                  <dd class="font-sans text-sm text-ivory/90 font-light leading-relaxed">
+                    Hardware encryption keys are split and engraved onto stainless steel archival plates for placement in your family bank vault or estate trust safe.
+                  </dd>
+                </div>
+
+                <div>
+                  <dt class="font-mono text-[11px] uppercase tracking-widestPlus text-brass mb-1">Zero Studio Retention Protocol</dt>
+                  <dd class="font-sans text-sm text-ivory/90 font-light leading-relaxed">
+                    Upon final handover and cryptographic checksum verification, all temporary studio working drives are permanently wiped under witnessed destruction logs.
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="pt-6 mt-8 border-t border-hairline flex items-center justify-between font-mono text-[10px] text-stone uppercase tracking-wider">
+              <span>Zero Cloud · Zero Telemetry</span>
+              <span class="text-brass">100% Family Owned</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 4: PRIVATE COMMISSION INTAKE (#inquire)                       -->
+    <!-- ===================================================================== -->
+    <section id="inquire" class="py-24 sm:py-32 bg-obsidian">
+      <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-12 sm:mb-14">
+          <p class="font-mono text-xs uppercase tracking-widestPlus text-brass mb-3">
+            Section IV &nbsp;/&nbsp; Private Intake
+          </p>
+          <h2 class="font-serif text-3xl sm:text-5xl font-normal text-ivory leading-tight mb-4">
+            Inquire for Private Commission.
+          </h2>
+          <p class="font-sans text-sm sm:text-base text-stone font-light max-w-xl mx-auto leading-relaxed">
+            Commissions are accepted strictly by private inquiry or referral. Submit your details below to receive our bilateral Non-Disclosure Agreement and arrange a confidential architectural briefing.
+          </p>
+        </div>
+
+        <!-- Intake Card -->
+        <div class="border border-hairline-brass bg-surface p-7 sm:p-12 rounded-sm shadow-2xl">
+          
+          <form id="commission-form" novalidate class="space-y-6">
+            
+            <!-- Inline Validation Alert (No browser alert() used) -->
+            <div id="form-error-banner" role="alert" class="hidden p-4 border border-brass/50 bg-brass/10 text-ivory text-xs font-mono leading-relaxed rounded-sm">
+              Please complete the highlighted required fields so our Managing Director can assign your confidential dossier.
+            </div>
+
+            <!-- Row 1: Principal or Representative Name & Confidential Email -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="principal-name" class="block font-mono text-[11px] uppercase tracking-widestPlus text-stone mb-2">
+                  Principal or Representative Name <span class="text-brass">*</span>
+                </label>
+                <input
+                  id="principal-name"
+                  name="principalName"
+                  type="text"
+                  required
+                  placeholder="Henrik Lindqvist"
+                  class="foliarch-input w-full px-4 py-3.5 text-sm rounded-sm"
+                />
+              </div>
+
+              <div>
+                <label for="confidential-email" class="block font-mono text-[11px] uppercase tracking-widestPlus text-stone mb-2">
+                  Confidential Email <span class="text-brass">*</span>
+                </label>
+                <input
+                  id="confidential-email"
+                  name="confidentialEmail"
+                  type="email"
+                  required
+                  placeholder="h.lindqvist@privateoffice.ch"
+                  class="foliarch-input w-full px-4 py-3.5 text-sm rounded-sm"
+                />
+              </div>
+            </div>
+
+            <!-- Row 2: Capacity & Primary Jurisdiction / City -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="inquiry-capacity" class="block font-mono text-[11px] uppercase tracking-widestPlus text-stone mb-2">
+                  Capacity <span class="text-brass">*</span>
+                </label>
+                <select
+                  id="inquiry-capacity"
+                  name="capacity"
+                  class="foliarch-input w-full px-4 py-3.5 text-sm rounded-sm">
+                  <option value="Principal">Principal</option>
+                  <option value="Family Office">Family Office</option>
+                  <option value="Private Advisor">Private Advisor</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="jurisdiction-city" class="block font-mono text-[11px] uppercase tracking-widestPlus text-stone mb-2">
+                  Primary Jurisdiction / City <span class="text-brass">*</span>
+                </label>
+                <input
+                  id="jurisdiction-city"
+                  name="jurisdictionCity"
+                  type="text"
+                  required
+                  placeholder="London / Zürich / New York"
+                  class="foliarch-input w-full px-4 py-3.5 text-sm rounded-sm"
+                />
+              </div>
+            </div>
+
+            <!-- Row 3: Archival Scope Checkboxes -->
+            <div>
+              <span class="block font-mono text-[11px] uppercase tracking-widestPlus text-stone mb-3">
+                Archival Scope
+              </span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label class="cursor-pointer flex items-center gap-3 p-3.5 border border-hairline bg-obsidian/60 hover:border-brass/50 rounded-sm transition-colors">
+                  <input type="checkbox" name="archivalScope" value="Hand-Bound Istanbul Chronicle" checked class="accent-[#C5A467] w-4 h-4 rounded-sm" />
+                  <span class="font-sans text-xs sm:text-sm text-ivory/90">Hand-Bound Istanbul Chronicle</span>
+                </label>
+
+                <label class="cursor-pointer flex items-center gap-3 p-3.5 border border-hairline bg-obsidian/60 hover:border-brass/50 rounded-sm transition-colors">
+                  <input type="checkbox" name="archivalScope" value="Sovereign Offline Memory Vault" checked class="accent-[#C5A467] w-4 h-4 rounded-sm" />
+                  <span class="font-sans text-xs sm:text-sm text-ivory/90">Sovereign Offline Memory Vault</span>
+                </label>
+
+                <label class="cursor-pointer flex items-center gap-3 p-3.5 border border-hairline bg-obsidian/60 hover:border-brass/50 rounded-sm transition-colors">
+                  <input type="checkbox" name="archivalScope" value="Oral History & Document Digitization" class="accent-[#C5A467] w-4 h-4 rounded-sm" />
+                  <span class="font-sans text-xs sm:text-sm text-ivory/90">Oral History &amp; Document Digitization</span>
+                </label>
+
+                <label class="cursor-pointer flex items-center gap-3 p-3.5 border border-hairline bg-obsidian/60 hover:border-brass/50 rounded-sm transition-colors">
+                  <input type="checkbox" name="archivalScope" value="Milestone / Closing Tribute Edition" class="accent-[#C5A467] w-4 h-4 rounded-sm" />
+                  <span class="font-sans text-xs sm:text-sm text-ivory/90">Milestone / Closing Tribute Edition</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Row 4: Optional Notes -->
+            <div>
+              <label for="optional-notes" class="block font-mono text-[11px] uppercase tracking-widestPlus text-stone mb-2">
+                Optional Notes
+              </label>
+              <textarea
+                id="optional-notes"
+                name="optionalNotes"
+                rows="4"
+                placeholder="Share a brief note regarding the span of decades, existing archival materials, or preferred briefing protocol..."
+                class="foliarch-input w-full px-4 py-3.5 text-sm rounded-sm resize-y"></textarea>
+            </div>
+
+            <!-- Submit Button & Direct Email Note -->
+            <div class="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+              <p class="font-mono text-[11px] text-stone/80 leading-relaxed max-w-sm">
+                Direct correspondence: <a href="mailto:commissions@foliarch.com" class="text-ivory underline decoration-brass/60 underline-offset-4 hover:text-brass">commissions@foliarch.com</a>
+              </p>
+              <button
+                type="submit"
+                class="w-full sm:w-auto px-8 py-4 bg-ivory text-obsidian font-mono text-xs uppercase tracking-widestPlus font-medium hover:bg-brass transition-colors rounded-sm shrink-0">
+                Request Confidential Dossier
+              </button>
+            </div>
+          </form>
+
+          <!-- =============================================================== -->
+          <!-- ENGRAVED CONFIRMATION CARD: "Confidential Dossier Assigned"     -->
+          <!-- =============================================================== -->
+          <div id="confirmation-dossier" class="hidden fade-enter space-y-7">
+            <div class="border border-brass/40 bg-obsidian/90 p-6 sm:p-8 rounded-sm space-y-6">
+              
+              <!-- Engraved Header -->
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-hairline">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-brass"></span>
+                  <span class="font-mono text-xs uppercase tracking-widestPlus text-brass">
+                    Confidential Dossier Assigned
+                  </span>
+                </div>
+                <span id="dossier-ref-code" class="font-mono text-xs sm:text-sm text-ivory bg-surface px-3.5 py-1.5 border border-brass/35 rounded-sm">
+                  FLR-2026-849
+                </span>
+              </div>
+
+              <!-- Confirmation Body -->
+              <div>
+                <h3 class="font-serif text-3xl text-ivory font-normal mb-3">
+                  Dossier logged for <span id="dossier-client-name" class="italic">Principal</span>.
+                </h3>
+                <p class="font-sans text-sm sm:text-base text-stone font-light leading-relaxed">
+                  Your private commission inquiry has been recorded under strict confidentiality. Our Managing Director will respond within 24 business hours with our standard bilateral Non-Disclosure Agreement and private consultation times. For immediate executive office coordination, write directly to <a href="mailto:commissions@foliarch.com" class="text-ivory underline decoration-brass underline-offset-4 hover:text-brass">commissions@foliarch.com</a> quoting your dossier code.
+                </p>
+              </div>
+
+              <!-- Dossier Metadata Summary -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-surface border border-hairline rounded-sm font-mono text-xs">
+                <div>
+                  <span class="block text-[10px] text-stone uppercase tracking-wider mb-1">Represented Capacity</span>
+                  <span id="dossier-capacity" class="text-ivory">Principal</span>
+                </div>
+                <div>
+                  <span class="block text-[10px] text-stone uppercase tracking-wider mb-1">Primary Jurisdiction</span>
+                  <span id="dossier-jurisdiction" class="text-ivory">London / Zürich</span>
+                </div>
+                <div class="sm:col-span-2">
+                  <span class="block text-[10px] text-stone uppercase tracking-wider mb-1">Selected Archival Scope</span>
+                  <span id="dossier-scope" class="text-ivory">Hand-Bound Istanbul Chronicle · Sovereign Offline Memory Vault</span>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <button
+                  id="copy-dossier-btn"
+                  type="button"
+                  class="w-full sm:w-auto px-5 py-2.5 border border-hairline-brass hover:border-brass text-xs font-mono uppercase tracking-widestPlus text-ivory rounded-sm transition-colors">
+                  Copy Dossier Code
+                </button>
+                <button
+                  id="reset-form-btn"
+                  type="button"
+                  class="text-xs font-mono text-stone hover:text-ivory underline underline-offset-4">
+                  Submit another inquiry
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- FOOTER                                                                -->
+  <!-- ===================================================================== -->
+  <footer class="border-t border-hairline bg-obsidian py-14 sm:py-16">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      
+      <div class="flex items-start gap-4">
+        <svg class="w-8 h-8 text-brass shrink-0 mt-0.5" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="31" height="31" stroke="currentColor" stroke-width="0.9" stroke-opacity="0.55" />
+          <rect x="5.5" y="5.5" width="25" height="25" stroke="currentColor" stroke-width="0.65" stroke-opacity="0.28" />
+          <path d="M13.5 10.5V25.5" stroke="currentColor" stroke-width="1.35" />
+          <path d="M11.5 10.5H23.5" stroke="currentColor" stroke-width="1.25" />
+          <path d="M13.5 17.5H21" stroke="currentColor" stroke-width="1.15" />
+          <path d="M11.5 25.5H16" stroke="currentColor" stroke-width="0.95" />
+          <circle cx="23.5" cy="24.5" r="1" fill="currentColor" fill-opacity="0.75" />
+        </svg>
+        <div>
+          <p class="font-serif text-lg tracking-widestPlus text-ivory uppercase">
+            FOLIARCH <span class="text-brass mx-1.5">—</span> <span class="normal-case font-normal text-ivory/90">Private Publishing &amp; Archival House</span>
+          </p>
+          <p class="font-mono text-[11px] uppercase tracking-widestPlus text-stone mt-1.5">
+            Istanbul &nbsp;·&nbsp; London &nbsp;·&nbsp; New York
+          </p>
+        </div>
+      </div>
+
+      <div class="font-mono text-[11px] text-stone/80 md:text-right space-y-1">
+        <p>
+          <a href="https://foliarch.com" class="text-ivory hover:text-brass transition-colors">foliarch.com</a>
+          <span class="mx-2 text-stone/40">|</span>
+          <a href="mailto:commissions@foliarch.com" class="hover:text-ivory transition-colors">commissions@foliarch.com</a>
+        </p>
+        <p class="text-stone/55">&copy; 2026 Foliarch. Private Commissions Only.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- INTERACTIVE JAVASCRIPT                                                -->
+  <!-- ===================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // -------------------------------------------------------------------
+      // 1. Mobile Navigation Drawer
+      // -------------------------------------------------------------------
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIconOpen = document.getElementById('menu-icon-open');
+      const menuIconClose = document.getElementById('menu-icon-close');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+          mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
+          mobileMenu.classList.toggle('hidden');
+          menuIconOpen.classList.toggle('hidden');
+          menuIconClose.classList.toggle('hidden');
+        });
+
+        mobileNavLinks.forEach((link) => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            menuIconOpen.classList.remove('hidden');
+            menuIconClose.classList.add('hidden');
+          });
+        });
+      }
+
+      // -------------------------------------------------------------------
+      // 2. Interactive Sample Biography Spread (#chronicle)
+      // -------------------------------------------------------------------
+      const chaptersData = [
+        {
+          folioLeft: 'Folio 042',
+          pageLeft: '42',
+          pageRight: '43',
+          chapterNum: 'Chapter I  ·  February 1978',
+          title: 'The Winter of 1978',
+          subtitle: 'Bahnhofstrasse, Zürich — On risking an entire balance sheet on a single handshake.',
+          runningRight: 'Part One: Foundations',
+          leftParagraphs: [
+            'By the third week of February, snow had banked waist-high against the iron railings along the Limmat, and Henrik had less than forty-eight hours before the credit line in Rotterdam expired. In the back booth of Café Sprüngli, he laid a single sheet of onion-skin telex paper between two espresso cups—not a formal charter party, only a hand-penciled freight schedule signed in blue fountain ink.',
+            '“If the North Sea ice holds through March, we lose the deposit and the vessel,” he recalled forty years later, tapping the ash from his cigarette before the studio microphone. “If it breaks early, we own the corridor.”'
+          ],
+          rightParagraphs: [
+            'He did not cable the board in Stockholm until the train had already crossed the Rhine. In the margin of his pocket ledger that evening, beneath a column of Swiss franc conversions, he wrote a single line that would govern every acquisition the family made for the next four decades: <em class="italic">“Never syndicate conviction; share only the harvest.”</em>',
+            'Three weeks later, the ice cleared six days ahead of the meteorological forecast. The first cargo docked at dawn, clearing the company’s entire debt before noon.'
+          ],
+          sourceCode: 'REF: FLR-1978-014',
+          citationPrimary: '1. Personal Ledger No. 14 (1977–1979), entry dated 19 February 1978, p. 88; verified against Cassette Tape 03B, Side A (recorded October 2016).',
+          citationSecondary: 'Indexed in Foliarch Sovereign Enclave · Verbatim audio transcript & 1200-DPI margin scan linked.'
+        },
+        {
+          folioLeft: 'Folio 118',
+          pageLeft: '118',
+          pageRight: '119',
+          chapterNum: 'Chapter II  ·  September 1986',
+          title: 'Letters from Geneva',
+          subtitle: 'Rue du Rhône — Intimate air-mail correspondence on sudden liquidity and raising children.',
+          runningRight: 'Part Two: Expansion & Home',
+          leftParagraphs: [
+            'Success arrived not as a single celebration, but as an unrelenting calendar of overnight flights between Geneva, Tokyo, and Houston. Across sixty-four pale blue air-mail envelopes preserved in Astrid’s cedar writing desk, the private cost of building an international enterprise emerges in quiet, unguarded prose.',
+            '“The lawyers congratulated me tonight on closing the Osaka joint venture,” Henrik wrote on hotel stationery at two in the morning, “yet all I could think about was Lukas learning to ride his bicycle without me holding the saddle.”'
+          ],
+          rightParagraphs: [
+            'Astrid’s replies—written at the kitchen table after the children slept—anchored the household against the sudden distortion of wealth. <em class="italic">“Do not apologize for building the house,”</em> she answered on 14 September 1986. <em class="italic">“Just promise that when you walk through the front door on Fridays, the chairman stays outside on the gravel.”</em>',
+            'From that autumn onward, no business telephone call was ever accepted at the family dining table—a rule kept unbroken for thirty-five years.'
+          ],
+          sourceCode: 'REF: FLR-1986-04B',
+          citationPrimary: '2. Box 04, Blue Air-Mail Folio (1985–1988), Letters 19 & 22, handwritten ink on Hôtel des Bergues stationery, 11–14 September 1986.',
+          citationSecondary: 'Indexed in Foliarch Sovereign Enclave · Full correspondence digitized at 1200 DPI.'
+        },
+        {
+          folioLeft: 'Folio 264',
+          pageLeft: '264',
+          pageRight: '265',
+          chapterNum: 'Chapter III  ·  November 2021',
+          title: 'On Succession',
+          subtitle: 'Recorded in the library for grandchildren who have not yet been born.',
+          runningRight: 'Part Four: Stewardship',
+          leftParagraphs: [
+            'In the autumn of his seventy-ninth year, with no lawyers or trustees in the room, Henrik sat beside the hearth for four consecutive mornings to record an unvarnished testament addressed directly to the third and fourth generations of his family.',
+            '“Capital is extraordinarily patient when you do not ask it to flatter your ego,” he said, leaning forward so the microphone caught every word. “Most families lose what they built not through bad investments, but because the third generation mistakes inheritance for personal achievement.”'
+          ],
+          rightParagraphs: [
+            'Rather than issuing rigid instructions from beyond the grave, he outlined three freedoms he hoped the family’s endowment would protect: the freedom to pursue difficult craft without rushing for early applause, the duty to remain quietly generous, and the courage to sell any asset that divides siblings.',
+            '<em class="italic">“If you ever have to choose between preserving a holding company and preserving Sunday dinner together, liquidate the company on Monday morning.”</em>'
+          ],
+          sourceCode: 'REF: FLR-2021-OH7',
+          citationPrimary: '3. Oral History Session VII, timestamp 18:40–24:15 (recorded 12 November 2021); master WAV file preserved in Sovereign Enclave.',
+          citationSecondary: 'Indexed in Foliarch Sovereign Enclave · Verbatim audio playback & time-coded transcript linked.'
+        }
+      ];
+
+      const chapterTabs = document.querySelectorAll('.chapter-tab');
+      const bookContentEl = document.getElementById('book-content');
+
+      function renderChapter(index) {
+        const data = chaptersData[index];
+        if (!data) return;
+
+        bookContentEl.classList.remove('fade-enter');
+        void bookContentEl.offsetWidth;
+        bookContentEl.classList.add('fade-enter');
+
+        document.getElementById('book-folio-left').textContent = data.folioLeft;
+        document.getElementById('book-page-left').textContent = data.pageLeft;
+        document.getElementById('book-page-right').textContent = data.pageRight;
+        document.getElementById('book-chapter-num').textContent = data.chapterNum;
+        document.getElementById('book-chapter-title').textContent = data.title;
+        document.getElementById('book-chapter-subtitle').textContent = data.subtitle;
+        document.getElementById('book-running-right').textContent = data.runningRight;
+        document.getElementById('book-source-code').textContent = data.sourceCode;
+        document.getElementById('book-citation-primary').textContent = data.citationPrimary;
+        document.getElementById('book-citation-secondary').textContent = data.citationSecondary;
+
+        const leftContainer = document.getElementById('book-left-paragraphs');
+        leftContainer.innerHTML = data.leftParagraphs
+          .map((p, idx) => `<p class="${idx === 0 ? 'editorial-dropcap' : ''}">${p}</p>`)
+          .join('');
+
+        const rightContainer = document.getElementById('book-right-paragraphs');
+        rightContainer.innerHTML = data.rightParagraphs
+          .map((p) => `<p>${p}</p>`)
+          .join('');
+      }
+
+      chapterTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const idx = parseInt(tab.getAttribute('data-chapter'), 10);
+
+          chapterTabs.forEach((t) => {
+            t.setAttribute('aria-selected', 'false');
+            t.classList.remove('bg-surfaceElevated', 'text-ivory');
+            t.classList.add('text-stone');
+            const labelSpan = t.querySelector('span:first-child');
+            if (labelSpan) {
+              labelSpan.classList.remove('text-brass');
+              labelSpan.classList.add('text-stone/70');
+            }
+          });
+
+          tab.setAttribute('aria-selected', 'true');
+          tab.classList.add('bg-surfaceElevated', 'text-ivory');
+          tab.classList.remove('text-stone');
+          const activeLabel = tab.querySelector('span:first-child');
+          if (activeLabel) {
+            activeLabel.classList.add('text-brass');
+            activeLabel.classList.remove('text-stone/70');
+          }
+
+          renderChapter(idx);
+        });
+      });
+
+      // -------------------------------------------------------------------
+      // 3. Interactive Sovereign Family Memory Vault (#vault)
+      // -------------------------------------------------------------------
+      const vaultEntries = [
+        {
+          question: 'Why did Grandfather walk away from the 1982 Rotterdam merger?',
+          recordCount: 'Retrieved from 3 Verified Primary Artifacts',
+          paragraphs: [
+            'Although the Rotterdam consortium offered a 3.4× valuation premium in November 1982, Henrik declined the merger over two non-negotiable terms: the buyers demanded the immediate closure of the Antwerp engineering yard <button type="button" class="inline-citation-pill" data-src-idx="0">[DOC-1978-04]</button> and insisted on sunsetting the family’s profit-sharing covenant with senior captains <button type="button" class="inline-citation-pill" data-src-idx="1">[AUDIO-1994-11]</button>.',
+            'In a private letter written the night before the final Zürich signing <button type="button" class="inline-citation-pill" data-src-idx="2">[LETTER-1982-09]</button>, he noted that surrendering operational autonomy for passive liquidity would leave his children with capital but no craft.'
+          ],
+          sources: [
+            {
+              code: '[DOC-1978-04]',
+              docId: '[DOC-1978-04] · ZÜRICH STUDY TELEX & MARGIN NOTE',
+              meta: 'Medium: Fountain Ink on Onion-Skin Telex · Date: 14 Nov 1982 · Box 09',
+              folioTag: '1200 DPI ARCHIVAL MASTER',
+              excerpt: '“They priced the steel and the tonnage contracts, yet valued the loyalty of forty-two captains at zero. Tell Van Der Berg we remain independent. — H.L., 14 Nov 1982, 23:40.”'
+            },
+            {
+              code: '[AUDIO-1994-11]',
+              docId: '[AUDIO-1994-11] · ORAL HISTORY ARCHIVE TAPE 03B',
+              meta: 'Medium: Remastered Reel-to-Reel Audio · Timestamp: 41:12 · Speaker: H. Lindqvist',
+              folioTag: '96KHZ / 24-BIT WAV MASTER',
+              excerpt: '“If we had signed in Rotterdam, we would have been wealthy rentiers by forty-five and bored by forty-six. Keeping Antwerp kept our edge sharp for the next thirty years.”'
+            },
+            {
+              code: '[LETTER-1982-09]',
+              docId: '[LETTER-1982-09] · PRIVATE LETTER TO ASTRID LINDQVIST',
+              meta: 'Medium: Handwritten Stationery · Date: 13 Nov 1982 · Cedar Folio 04',
+              folioTag: 'PROVENANCE: FAMILY SAFE',
+              excerpt: '“A balance sheet without an enterprise behind it is merely a scorecard. I would rather leave Lukas and Maja a living workshop than an idle vault.”'
+            }
+          ]
+        },
+        {
+          question: 'Find letters where Grandmother wrote about building the summer house.',
+          recordCount: 'Retrieved from 2 Verified Primary Artifacts',
+          paragraphs: [
+            'Between May 1989 and August 1991, Astrid exchanged fourteen letters with architect Karl-Erik Lindholm regarding the stone and timber house overlooking the archipelago <button type="button" class="inline-citation-pill" data-src-idx="0">[LETTER-1989-06]</button>. She stipulated that local granite quarried within ten kilometers be used for the hearth.',
+            'Her central architectural instruction was that the residence contain no formal reception wing—only a long pine table built to seat twenty-four family members and guests <button type="button" class="inline-citation-pill" data-src-idx="1">[DOC-1990-14]</button>.'
+          ],
+          sources: [
+            {
+              code: '[LETTER-1989-06]',
+              docId: '[LETTER-1989-06] · CORRESPONDENCE TO K. LINDHOLM',
+              meta: 'Medium: Heavy Cotton Letter Sheet · Date: 3 June 1989 · Folio 07',
+              folioTag: '1200 DPI ARCHIVAL MASTER',
+              excerpt: '“Dear Karl-Erik, please remove the formal parlor from the eastern elevation. If our grandchildren cannot walk in wearing wet wool socks straight from the jetty, we have built the wrong house.”'
+            },
+            {
+              code: '[DOC-1990-14]',
+              docId: '[DOC-1990-14] · ARCHITECTURAL SKETCHBOOK MARGINALIA',
+              meta: 'Medium: Graphite & Ink on Vellum Blueprint · Page 14 · Estate Archive',
+              folioTag: 'VERIFIED ESTATE RECORD',
+              excerpt: '“Stone masonry specification approved by A.L. — Dining table dimensions fixed at 4.8 meters in untreated Nordic pine.”'
+            }
+          ]
+        },
+        {
+          question: 'What principles did Dad record regarding family stewardship?',
+          recordCount: 'Retrieved from 2 Verified Primary Artifacts',
+          paragraphs: [
+            'Across his 2021 library oral history sessions <button type="button" class="inline-citation-pill" data-src-idx="0">[AUDIO-2021-07]</button> and the preamble to the Family Charter <button type="button" class="inline-citation-pill" data-src-idx="1">[DOC-2019-01]</button>, Henrik emphasized three rules: avoid external leverage on core holdings, maintain operational literacy across generations, and place family unity above corporate continuity.',
+            'He specifically urged every heir to master an independent craft or discipline outside the family balance sheet before joining the board.'
+          ],
+          sources: [
+            {
+              code: '[AUDIO-2021-07]',
+              docId: '[AUDIO-2021-07] · LIBRARY TESTAMENT SESSION VII',
+              meta: 'Medium: Uncompressed Digital Master · Recorded: 12 Nov 2021 · 18:40',
+              folioTag: 'VERBATIM AUDIO TRANSCRIPT',
+              excerpt: '“If you ever have to choose between preserving a holding company and preserving Sunday dinner together, liquidate the company on Monday morning.”'
+            },
+            {
+              code: '[DOC-2019-01]',
+              docId: '[DOC-2019-01] · FAMILY CHARTER PREAMBLE',
+              meta: 'Medium: Signed Vellum Manuscript · Date: 19 May 2019 · Family Office',
+              folioTag: 'SIGNED ORIGINAL',
+              excerpt: '“Article I: We are temporary custodians of patient capital. No member shall sit upon the council until they have built or led an endeavor independent of the family name.”'
+            }
+          ]
+        }
+      ];
+
+      const vaultPresetBtns = document.querySelectorAll('.vault-preset-btn');
+      const vaultAnswerContainer = document.getElementById('vault-answer-container');
+      const vaultActiveQuestionEl = document.getElementById('vault-active-question');
+      const vaultRecordCountEl = document.getElementById('vault-record-count');
+      const vaultAnswerTextEl = document.getElementById('vault-answer-text');
+      const vaultSourceBadgesEl = document.getElementById('vault-source-badges');
+
+      function selectSourceArtifact(sources, srcIndex) {
+        const src = sources[srcIndex];
+        if (!src) return;
+
+        document.getElementById('inspector-doc-id').textContent = src.docId;
+        document.getElementById('inspector-doc-meta').textContent = src.meta;
+        document.getElementById('inspector-folio-tag').textContent = src.folioTag;
+        document.getElementById('inspector-doc-excerpt').textContent = src.excerpt;
+
+        // Highlight matching bottom badges & inline citation pills
+        document.querySelectorAll('.source-badge-btn').forEach((b, idx) => {
+          if (idx === srcIndex) {
+            b.classList.add('border-brass', 'bg-brass/15', 'text-ivory');
+            b.classList.remove('border-hairline', 'bg-surface', 'text-stone');
+          } else {
+            b.classList.remove('border-brass', 'bg-brass/15', 'text-ivory');
+            b.classList.add('border-hairline', 'bg-surface', 'text-stone');
+          }
+        });
+
+        document.querySelectorAll('.inline-citation-pill').forEach((pill) => {
+          const pIdx = parseInt(pill.getAttribute('data-src-idx'), 10);
+          if (pIdx === srcIndex) {
+            pill.classList.add('active-pill');
+          } else {
+            pill.classList.remove('active-pill');
+          }
+        });
+      }
+
+      function renderVaultEntry(entry) {
+        vaultAnswerContainer.classList.remove('fade-enter');
+        void vaultAnswerContainer.offsetWidth;
+        vaultAnswerContainer.classList.add('fade-enter');
+
+        vaultActiveQuestionEl.textContent = entry.question;
+        vaultRecordCountEl.textContent = entry.recordCount;
+        vaultAnswerTextEl.innerHTML = entry.paragraphs.map((p) => `<p>${p}</p>`).join('');
+
+        // Bind inline citation pill click listeners
+        vaultAnswerTextEl.querySelectorAll('.inline-citation-pill').forEach((pill) => {
+          pill.addEventListener('click', () => {
+            const idx = parseInt(pill.getAttribute('data-src-idx'), 10);
+            selectSourceArtifact(entry.sources, idx);
+          });
+        });
+
+        // Render bottom citation pills
+        vaultSourceBadgesEl.innerHTML = '';
+        entry.sources.forEach((src, idx) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'source-badge-btn px-3 py-1.5 font-mono text-[11px] rounded-sm border transition-all focus:outline-none border-hairline bg-surface text-stone hover:border-brass/60 hover:text-ivory';
+          btn.textContent = src.code;
+          btn.addEventListener('click', () => selectSourceArtifact(entry.sources, idx));
+          vaultSourceBadgesEl.appendChild(btn);
+        });
+
+        // Default select first source artifact
+        if (entry.sources.length > 0) {
+          selectSourceArtifact(entry.sources, 0);
+        }
+      }
+
+      // Initialize first vault entry
+      renderVaultEntry(vaultEntries[0]);
+
+      vaultPresetBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.getAttribute('data-vault-query'), 10);
+
+          vaultPresetBtns.forEach((b) => {
+            b.classList.remove('border-brass/55', 'bg-brass/10');
+            b.classList.add('border-hairline', 'bg-obsidian/65');
+            const tag = b.querySelector('span:first-child');
+            if (tag) {
+              tag.classList.remove('text-brass');
+              tag.classList.add('text-stone');
+            }
+          });
+
+          btn.classList.add('border-brass/55', 'bg-brass/10');
+          btn.classList.remove('border-hairline', 'bg-obsidian/65');
+          const activeTag = btn.querySelector('span:first-child');
+          if (activeTag) {
+            activeTag.classList.add('text-brass');
+            activeTag.classList.remove('text-stone');
+          }
+
+          renderVaultEntry(vaultEntries[idx]);
+        });
+      });
+
+      // Custom Prompt Submission Handler
+      const vaultCustomForm = document.getElementById('vault-custom-form');
+      const vaultCustomInput = document.getElementById('vault-custom-input');
+
+      if (vaultCustomForm && vaultCustomInput) {
+        vaultCustomForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const rawQuery = vaultCustomInput.value.trim();
+          if (!rawQuery) return;
+
+          vaultPresetBtns.forEach((b) => {
+            b.classList.remove('border-brass/55', 'bg-brass/10');
+            b.classList.add('border-hairline', 'bg-obsidian/65');
+          });
+
+          const customEntry = {
+            question: rawQuery,
+            recordCount: 'Retrieved from 2 Verified Primary Artifacts',
+            paragraphs: [
+              `Across indexed correspondence and recorded transcripts matching “${rawQuery}”, the primary family archive consistently emphasizes long-horizon capital patience, direct operational accountability <button type="button" class="inline-citation-pill" data-src-idx="0">[DOC-1978-04]</button>, and keeping strategic reserves unencumbered during periods of market euphoria.`,
+              'In his 2021 library testament <button type="button" class="inline-citation-pill" data-src-idx="1">[AUDIO-2021-07]</button>, Henrik noted that enduring independence depends on never allowing external creditors to dictate family timing.'
+            ],
+            sources: [
+              {
+                code: '[DOC-1978-04]',
+                docId: '[DOC-1978-04] · PERSONAL LEDGER NO. 14',
+                meta: 'Medium: Fountain Ink Margin Annotation · Date: 19 Feb 1978 · Zürich',
+                folioTag: '1200 DPI ARCHIVAL MASTER',
+                excerpt: '“Never syndicate conviction; share only the harvest. Keep sufficient liquidity in Zürich so no banker ever dictates the timing of a sale.”'
+              },
+              {
+                code: '[AUDIO-2021-07]',
+                docId: '[AUDIO-2021-07] · ORAL HISTORY SESSION VII',
+                meta: 'Medium: Master WAV Recording · Timestamp: 09:14 · Library Archive',
+                folioTag: 'VERBATIM AUDIO TRANSCRIPT',
+                excerpt: '“Debt is a fair-weather companion. Whenever we expanded into a new harbor, we paid down the prior vessel first.”'
+              }
+            ]
+          };
+
+          renderVaultEntry(customEntry);
+          vaultCustomInput.value = '';
+        });
+      }
+
+      // -------------------------------------------------------------------
+      // 4. Private Commission Intake Form (#inquire)
+      // -------------------------------------------------------------------
+      const commissionForm = document.getElementById('commission-form');
+      const formErrorBanner = document.getElementById('form-error-banner');
+      const confirmationDossier = document.getElementById('confirmation-dossier');
+      const copyDossierBtn = document.getElementById('copy-dossier-btn');
+      const resetFormBtn = document.getElementById('reset-form-btn');
+
+      if (commissionForm) {
+        commissionForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const nameInput = document.getElementById('principal-name');
+          const emailInput = document.getElementById('confidential-email');
+          const capacitySelect = document.getElementById('inquiry-capacity');
+          const jurisdictionInput = document.getElementById('jurisdiction-city');
+          const scopeCheckboxes = document.querySelectorAll('input[name="archivalScope"]:checked');
+
+          const nameVal = nameInput.value.trim();
+          const emailVal = emailInput.value.trim();
+          const jurisdictionVal = jurisdictionInput.value.trim();
+          const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+
+          [nameInput, emailInput, jurisdictionInput].forEach((el) => {
+            el.style.borderColor = '';
+          });
+
+          let hasError = false;
+          if (!nameVal) {
+            nameInput.style.borderColor = '#C5A467';
+            hasError = true;
+          }
+          if (!emailVal || !emailValid) {
+            emailInput.style.borderColor = '#C5A467';
+            hasError = true;
+          }
+          if (!jurisdictionVal) {
+            jurisdictionInput.style.borderColor = '#C5A467';
+            hasError = true;
+          }
+
+          if (hasError) {
+            formErrorBanner.classList.remove('hidden');
+            return;
+          }
+
+          formErrorBanner.classList.add('hidden');
+
+          // Generate FLR-2026-XXXX reference code
+          const randomCode = Math.floor(100 + Math.random() * 900);
+          const dossierCode = `FLR-2026-${randomCode}`;
+
+          const selectedScopes = Array.from(scopeCheckboxes).map((cb) => cb.value);
+          const scopeSummary = selectedScopes.length > 0 ? selectedScopes.join(' · ') : 'Full Private Commission';
+
+          document.getElementById('dossier-ref-code').textContent = dossierCode;
+          document.getElementById('dossier-client-name').textContent = nameVal;
+          document.getElementById('dossier-capacity').textContent = capacitySelect.value;
+          document.getElementById('dossier-jurisdiction').textContent = jurisdictionVal;
+          document.getElementById('dossier-scope').textContent = scopeSummary;
+
+          commissionForm.classList.add('hidden');
+          confirmationDossier.classList.remove('hidden');
+        });
+      }
+
+      // Copy Dossier Code using iFrame-safe execCommand('copy')
+      if (copyDossierBtn) {
+        copyDossierBtn.addEventListener('click', () => {
+          const codeText = document.getElementById('dossier-ref-code').textContent;
+          const tempArea = document.createElement('textarea');
+          tempArea.value = `Foliarch Private Commission Dossier — ${codeText} (commissions@foliarch.com)`;
+          tempArea.style.position = 'fixed';
+          tempArea.style.opacity = '0';
+          document.body.appendChild(tempArea);
+          tempArea.select();
+          try {
+            document.execCommand('copy');
+            const originalLabel = copyDossierBtn.textContent;
+            copyDossierBtn.textContent = 'Dossier Code Copied';
+            copyDossierBtn.classList.add('border-brass', 'text-brass');
+            setTimeout(() => {
+              copyDossierBtn.textContent = originalLabel;
+              copyDossierBtn.classList.remove('border-brass', 'text-brass');
+            }, 2200);
+          } catch (err) {
+            // Graceful fallback
+          }
+          document.body.removeChild(tempArea);
+        });
+      }
+
+      // Reset form button
+      if (resetFormBtn) {
+        resetFormBtn.addEventListener('click', () => {
+          commissionForm.reset();
+          confirmationDossier.classList.add('hidden');
+          commissionForm.classList.remove('hidden');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
